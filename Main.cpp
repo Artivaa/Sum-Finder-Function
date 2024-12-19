@@ -19,7 +19,8 @@ double power_series_e(double x, double e)
     double sum = x;
     double term;
     int n = 1;
-    do {
+    do 
+    {
         term = pow(x, 4 * n + 1) / (4 * n + 1);
         sum += term;
         n++;
