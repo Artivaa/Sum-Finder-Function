@@ -22,13 +22,13 @@ double calculateSeriesByN(double x, int n)
 }
 
 // ¬ычисление р€да с заданной точностью (рекурсивно)
-double calculateSeriesByE(double x, double tolerance, double term = 0, int n = 0)
+double calculateSeriesByE(double x, double epsilon, double term = 0, int n = 0)
 {
     double currentTerm = pow(x, 4 * n + 1) / (4 * n + 1);
-    if (fabs(currentTerm) <= tolerance)
+    if (fabs(currentTerm) <= epsilon)
         return term + currentTerm;
 
-    return calculateSeriesByE(x, tolerance, term + currentTerm, n + 1);
+    return calculateSeriesByE(x, epsilon, term + currentTerm, n + 1);
 }
 
 int main()
@@ -37,7 +37,7 @@ int main()
     const double end = 0.8;
     const int steps = 10;
     const int maxTerms = 3;
-    const double tolerance = 0.0001;
+    const double epsilon = 0.0001;
     const double stepSize = (end - start) / steps;
 
     cout << fixed << setprecision(6);
@@ -47,7 +47,7 @@ int main()
     for (double x = start; x <= end; x += stepSize)
     {
         double seriesByN = calculateSeriesByN(x, maxTerms);
-        double seriesByE = calculateSeriesByE(x, tolerance);
+        double seriesByE = calculateSeriesByE(x, epsilon);
         double exactValue = exactFunction(x);
 
         cout << setw(7) << x
